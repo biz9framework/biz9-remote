@@ -1,4 +1,5 @@
-const { connect_adapter,get_item_adapter,update_item_adapter,delete_item_adapter,get_data_adapter,update_data_adapter } = require('./adapter.js');
+//const { connect_adapter,get_item_adapter,update_item_adapter,delete_item_adapter,get_data_adapter,update_data_adapter } = require('./adapter.js');
+import { connect_adapter,get_item_adapter,update_item_adapter,delete_item_adapter,get_data_adapter,update_data_adapter }  from './adapter';
 
 const connect = async (url,obj) => {
     const data = await connect_adapter(url,obj);
@@ -24,7 +25,16 @@ const update_data = async (url,obj) => {
     const [error,data] = await update_data_adapter(url,obj);
     return [error,data];
 };
+export {
+    connect,
+    get_item,
+    get_data,
+    update_data,
+    delete_item,
+    update_item
+}
 
+/*
 module.exports = {
     connect,
     get_item,
@@ -33,3 +43,4 @@ module.exports = {
     delete_item,
     update_item
 }
+*/
