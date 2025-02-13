@@ -1,5 +1,4 @@
-//const axios = require('axios');
-import axios from 'axios';
+const axios = require('axios');
 
 const connect_adapter = (url,obj) => {
     return new Promise((callback) => {
@@ -92,7 +91,7 @@ const update_data_adapter = (url,obj) => {
     });
 }
 
-export {
+module.exports = {
     connect_adapter,
     get_item_adapter,
     delete_item_adapter,
@@ -100,15 +99,3 @@ export {
     get_data_adapter,
     update_data_adapter
 }
-
-/*
-exports = {
-    connect_adapter,
-    get_item_adapter,
-    delete_item_adapter,
-    update_item_adapter,
-    get_data_adapter,
-    update_data_adapter
-}
-*/
-

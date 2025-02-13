@@ -1,14 +1,6 @@
-import assert   from 'assert';
-import {get_item, update_item, delete_item, connect, get_data, update_data }  from './';
-import {get_test_item,w } from "biz9-utility";
-//import {get_cloud_url }   from "bsiz9-adapter";
-
-/*
 const assert  = require('assert');
 const {get_item, update_item, delete_item, connect, get_data, update_data } = require('./');
 const {get_test_item,w } = require("biz9-utility");
-//const {get_cloud_url }  = require("biz9-adapter");
-*/
 
 //
 /* --- TEST CONFIG START --- */
@@ -18,8 +10,7 @@ const APP_TITLE_ID='feb6d';
 const DATA_TYPE='dt_blank';
 const PORT_ID="1901";
 const TEST_URL="https://microsoftedge.github.io/Demos/json-dummy-data/64KB.json";
-//const CLOUD_URL="http://localhost:"+PORT_ID;
-const CLOUD_URL="http://localhost:"+PORT_ID + '/main/test/connect/';
+const CLOUD_URL="http://localhost:"+PORT_ID;
 /* --- TEST CONFIG END --- */
 /* --- TEST DATA CONFIG START --- */
 const biz9_config ={
@@ -44,8 +35,7 @@ const biz9_config ={
 
 test('connect', async () => {
     console.log('TEST-BIZ9-REMOTE-CONNECT-START');
-    //let cloud_url = get_cloud_url(biz9_config.APP_TITLE_ID,CLOUD_URL,'/main/test/connect/');
-    let cloud_url = CLOUD_URL;
+    let cloud_url = CLOUD_URL+'/main/test/connect/';
     let item_test = get_test_item(DATA_TYPE,ID);
     let data = await connect(cloud_url,item_test);
     assert.notStrictEqual(data, null);
@@ -55,13 +45,12 @@ test('connect', async () => {
 });
 test('item_update', async () => {
     console.log('TEST-BIZ9-REMOTE-UPDATE-ITEM-START');
-    //let cloud_url = get_cloud_url(biz9_config.APP_TITLE_ID,CLOUD_URL,'/main/crud/update/'+DATA_TYPE+"/"+ID);
-    let cloud_url = CLOUD_URL;
-
+    let cloud_url = CLOUD_URL+'/main/crud/update/'+DATA_TYPE+"/"+ID;
     let item_test = get_test_item(DATA_TYPE,ID);
     w('cloud_url',cloud_url);
     w('item_test',item_test);
     const [error,data] = await update_item(cloud_url,item_test);
+    w('error',error);
     w('data',data);
     assert.strictEqual(item_test.first_name,data.item.first_name);
     assert.strictEqual(item_test.title,data.item.title);
@@ -69,8 +58,7 @@ test('item_update', async () => {
 });
 test('item_get', async () => {
     console.log('TEST-BIZ9-REMOTE-GET-ITEM-START');
-    //let cloud_url = get_cloud_url(biz9_config.APP_TITLE_ID,CLOUD_URL,'/main/crud/get/'+DATA_TYPE+"/"+ID);
-    let cloud_url = CLOUD_URL;
+    let cloud_url = CLOUD_URL+'/main/crud/get/'+DATA_TYPE+"/"+ID;
     const [error,data] = await get_item(cloud_url);
     w('data',data);
     w('cloud_url',cloud_url);
@@ -79,8 +67,7 @@ test('item_get', async () => {
 });
 test('item_delete', async () => {
     console.log('TEST-BIZ9-REMOTE-DELETE-ITEM-START');
-    //let cloud_url = get_cloud_url(biz9_config.APP_TITLE_ID,CLOUD_URL,'/main/crud/delete/'+DATA_TYPE+"/"+ID);
-    let cloud_url = CLOUD_URL;
+    let cloud_url = CLOUD_URL+'/main/crud/delete/'+DATA_TYPE+"/"+ID;
     const [error,data] = await delete_item(cloud_url);
     w('data',data);
     w('cloud_url',cloud_url);
@@ -90,9 +77,7 @@ test('item_delete', async () => {
 });
 test('get_data', async () => {
     console.log('TEST-BIZ9-REMOTE-GET-DATA-START');
-    //let cloud_url = get_cloud_url(biz9_config.APP_TITLE_ID,CLOUD_URL,'/main/test/get');
-    let cloud_url = CLOUD_URL;
-
+    let cloud_url = CLOUD_URL+'/main/test/get';
     let item_test = get_test_item(DATA_TYPE,ID);
     w('cloud_url',cloud_url);
     w('item_test',item_test);
@@ -102,8 +87,7 @@ test('get_data', async () => {
 });
 test('update_data', async () => {
     console.log('TEST-BIZ9-REMOTE-UPDATE-DATA-START');
-    //let cloud_url = get_cloud_url(biz9_config.APP_TITLE_ID,CLOUD_URL,'/main/test/update');
-    let cloud_url = get_cloud_url(biz9_config.APP_TITLE_ID,CLOUD_URL,'/main/test/update');
+    let cloud_url = CLOUD_URL+'/main/test/update';
     let item_test = get_test_item(DATA_TYPE,ID);
     w('cloud_url',cloud_url);
     w('item_test',item_test);
