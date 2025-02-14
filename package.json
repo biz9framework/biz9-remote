@@ -1,6 +1,6 @@
 {
   "name": "biz9-remote",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "**The BiZ9-Remote Package**",
   "main": "index.js",
   "scripts": {
